@@ -12,6 +12,7 @@ namespace MatchingPairsGame
         static void Main(string[] args)
         {
             Board board = new Board();
+            board.Shuffle();
 
             while (true)
             {
@@ -22,15 +23,14 @@ namespace MatchingPairsGame
                 int turn2 = int.Parse(Console.ReadLine());
                 board.Reveal(turn2);
                 board.Draw();
-                //TODO: check to see if they match
-                Thread.Sleep(TimeSpan.FromSeconds(2));
-                board.Hide(turn1);
-                board.Hide(turn2);
-
+                if (!board.Compare(turn1, turn2))
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(2));
+                    board.Hide(turn1);
+                    board.Hide(turn2);
+                }
+                
             }
-
-            
-            
         }
     }
 }

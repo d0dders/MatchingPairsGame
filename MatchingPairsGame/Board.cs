@@ -37,6 +37,17 @@ namespace MatchingPairsGame
             }
         }
 
+        public void Shuffle()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < cards.Count(); i++)
+            {
+                Card card = cards[i]; 
+                cards.RemoveAt(i);
+                cards.Insert(rnd.Next(cards.Count), card);
+            }
+        }
+
         public void Reveal(int index)
         {
             cards[index - 1].Visible = true;
@@ -45,6 +56,20 @@ namespace MatchingPairsGame
         public void Hide(int index)
         {
             cards[index - 1].Visible = false;
+        }
+
+        public bool Compare(int turn1, int turn2)
+        {
+            bool value;
+            if (cards[turn1 - 1].Image == cards[turn2 - 1].Image)
+            {
+                value = true;
+            }
+            else
+            {
+                value = false;
+            }
+            return value;
         }
     }
 }
